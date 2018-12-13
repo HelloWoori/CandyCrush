@@ -3,7 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Baby Pink Dot
+  - Blue Dot
+  - Green Dot
+  - Ocean Dot
+  - Pink Dot
+  - Purple Dot
+  - Skyblue Dot
+  - Yellow Dot
   layers:
   - Default
   - TransparentFX

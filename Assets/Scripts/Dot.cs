@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class Dot : MonoBehaviour
 {
+    [Header("Board Variables")]
     public int column;
     public int row;
+    public int previousColumn;
+    public int previousRow;
+
     public int targetX;
     public int targetY;
 
@@ -29,6 +33,9 @@ public class Dot : MonoBehaviour
 
         row = targetY;
         column = targetX;
+
+        previousRow = row;
+        previousColumn = column;
     }
 
     void Update()
@@ -73,6 +80,22 @@ public class Dot : MonoBehaviour
         }
     }
 
+    public IEnumerator CheckMoveCo()
+    {
+        yield return new WaitForSeconds(.4f);
+        if (null != otherDot)
+        {
+            if (false == isMatched && false == otherDot.GetComponent<Dot>().isMatched)
+            {
+                otherDot.GetComponent<Dot>().row = row;
+                otherDot.GetComponent<Dot>().column = column;
+                row = previousRow;
+                column = previousColumn;
+            }
+            otherDot = null;
+        }
+    }
+
     private void OnMouseDown()
     {
         firstTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -94,14 +117,14 @@ public class Dot : MonoBehaviour
 
     void MovePieces()
     {
-        if (column < board.width && swipeAngle > -45 && swipeAngle <= 45)
+        if (column < board.width - 1 && swipeAngle > -45 && swipeAngle <= 45)
         {
             //Right Swipe
             otherDot = board.allDots[column + 1, row];
             otherDot.GetComponent<Dot>().column -= 1;
             column += 1;
         }
-        else if (row < board.height && swipeAngle > 45 && swipeAngle <= 135)
+        else if (row < board.height - 1 && swipeAngle > 45 && swipeAngle <= 135)
         {
             //Up Swipe
             otherDot = board.allDots[column, row + 1];
@@ -122,6 +145,8 @@ public class Dot : MonoBehaviour
             otherDot.GetComponent<Dot>().row += 1;
             row -= 1;
         }
+
+        StartCoroutine(CheckMoveCo());
     }
 
     void FindMatches()
