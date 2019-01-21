@@ -50,7 +50,6 @@ LightmapSettings:
     m_BounceScale: 1
     m_IndirectOutputScale: 1
     m_AlbedoBoost: 1
-    m_TemporalCoherenceThreshold: 1
     m_EnvironmentLightingMode: 0
     m_EnableBakedLightmaps: 0
     m_EnableRealtimeLightmaps: 0
@@ -117,7 +116,8 @@ NavMeshSettings:
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
   - component: {fileID: 205071539}
@@ -133,7 +133,8 @@ GameObject:
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 205071537}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -142,21 +143,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 7
   height: 10
-  tilePrefab: {fileID: 1327997894822440, guid: 6218b8a6145473b44815e1b49d347677, type: 2}
+  offSet: 10
+  tilePrefab: {fileID: 1327997894822440, guid: 6218b8a6145473b44815e1b49d347677, type: 3}
   dots:
-  - {fileID: 1220036597672972, guid: 30223c904d4acff49b7c776edcd77a2a, type: 2}
-  - {fileID: 1118865212065286, guid: deb3e5361bfcd5f4e967e0f05ff32349, type: 2}
-  - {fileID: 1515543734492404, guid: 10586769cee0d6146914da1eedffdc95, type: 2}
-  - {fileID: 1435039897808140, guid: cf78ec724a1b9b34695f93ca48718d59, type: 2}
-  - {fileID: 1730647889118932, guid: 3ba22dd9b2f6e10439551c9d718cc025, type: 2}
-  - {fileID: 1921532104231588, guid: 17dc66e548b5f844aaf43b815c251b96, type: 2}
-  - {fileID: 1937665807369560, guid: c7e02ef084b8dad4d9ee35de84996708, type: 2}
-  - {fileID: 1788393637359648, guid: f921e35fe8bfe774f861e008bfe38c86, type: 2}
+  - {fileID: 1220036597672972, guid: 30223c904d4acff49b7c776edcd77a2a, type: 3}
+  - {fileID: 1118865212065286, guid: deb3e5361bfcd5f4e967e0f05ff32349, type: 3}
+  - {fileID: 1515543734492404, guid: 10586769cee0d6146914da1eedffdc95, type: 3}
+  - {fileID: 1435039897808140, guid: cf78ec724a1b9b34695f93ca48718d59, type: 3}
+  - {fileID: 1730647889118932, guid: 3ba22dd9b2f6e10439551c9d718cc025, type: 3}
+  - {fileID: 1921532104231588, guid: 17dc66e548b5f844aaf43b815c251b96, type: 3}
+  - {fileID: 1937665807369560, guid: c7e02ef084b8dad4d9ee35de84996708, type: 3}
+  - {fileID: 1788393637359648, guid: f921e35fe8bfe774f861e008bfe38c86, type: 3}
 --- !u!4 &205071539
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 205071537}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -169,7 +172,8 @@ Transform:
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
   - component: {fileID: 519420032}
@@ -186,14 +190,16 @@ GameObject:
 AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
   serializedVersion: 2
@@ -202,6 +208,7 @@ Camera:
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
+  m_GateFitMode: 2
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -233,7 +240,8 @@ Camera:
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3, y: 5, z: -10}
