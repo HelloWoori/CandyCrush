@@ -15,6 +15,7 @@ public class Dot : MonoBehaviour
 
     public bool isMatched = false;
 
+    private FindMatches findMatches;
     private Board board;
     private GameObject otherDot;
 
@@ -27,8 +28,9 @@ public class Dot : MonoBehaviour
 
     void Start()
     {
+        findMatches = FindObjectOfType<FindMatches>();
         board = FindObjectOfType<Board>();
-
+        
         //targetX = (int)transform.position.x;
         //targetY = (int)transform.position.y;
 
@@ -41,7 +43,7 @@ public class Dot : MonoBehaviour
 
     void Update()
     {
-        FindMatches();
+        //FindMatches();
 
         if (isMatched)
         {
@@ -62,6 +64,8 @@ public class Dot : MonoBehaviour
             {
                 board.allDots[column, row] = this.gameObject;
             }
+
+            findMatches.FindAllMatches();
         }
         else
         {
@@ -80,6 +84,8 @@ public class Dot : MonoBehaviour
             {
                 board.allDots[column, row] = this.gameObject;
             }
+
+            findMatches.FindAllMatches();
         }
         else
         {

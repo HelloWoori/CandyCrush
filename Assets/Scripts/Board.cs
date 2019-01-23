@@ -20,10 +20,13 @@ public class Board : MonoBehaviour
     //private BackgroundTile[,] allTiles;
     public GameObject[,] allDots;
 
+    private FindMatches findMatches;
+
 	void Start ()
     {
         //allTiles = new BackgroundTile[width, height];
         allDots = new GameObject[width, height];
+        findMatches = FindObjectOfType<FindMatches>();
         SetUp();
 	}
 
@@ -104,6 +107,7 @@ public class Board : MonoBehaviour
     {
         if (allDots[column, row].GetComponent<Dot>().isMatched)
         {
+            findMatches.currentMatches.Remove(allDots[column, row]);
             Destroy(allDots[column, row]);
             allDots[column, row] = null;
         }
