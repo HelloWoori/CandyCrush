@@ -23,11 +23,21 @@ public class Dot : MonoBehaviour
     private Vector2 finalTouchPosition;
     private Vector2 tempPosition;
 
+    [Header("Swipe Stuff")]
     public float swipeAngle = 0f;
     public float swipeResist = 1f;
 
+    [Header("Powerup Stuff")]
+    public bool isRowBomb;
+    public bool isColumnBomb;
+    public GameObject rowArrow;
+    public GameObject columnArrow;
+
     void Start()
     {
+        isRowBomb = false;
+        isColumnBomb = false;
+
         findMatches = FindObjectOfType<FindMatches>();
         board = FindObjectOfType<Board>();
         
@@ -41,10 +51,19 @@ public class Dot : MonoBehaviour
         //previousColumn = column;
     }
 
+    //This is for testing and Debug only.
+    private void OnMouseOver()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            isRowBomb = true;
+            GameObject arrow = Instantiate(rowArrow, transform.position, Quaternion.identity);
+            arrow.transform.parent = this.transform;
+        }
+    }
+
     void Update()
     {
-        //FindMatches();
-
         if (isMatched)
         {
             SpriteRenderer mySprite = GetComponent<SpriteRenderer>();
