@@ -117,8 +117,9 @@ public class Board : MonoBehaviour
                 findMatches.CheckBombs();
             }
 
-            findMatches.currentMatches.Remove(allDots[column, row]);
-            GameObject particle = Instantiate(destroyEffect, allDots[column, row].transform.position, Quaternion.identity);
+            GameObject particle = Instantiate(destroyEffect, 
+                                              allDots[column, row].transform.position, 
+                                              Quaternion.identity);
             Destroy(particle, .5f);
             Destroy(allDots[column, row]);
             allDots[column, row] = null;
@@ -137,7 +138,7 @@ public class Board : MonoBehaviour
                 }
             }
         }
-
+        findMatches.currentMatches.Clear();
         StartCoroutine(DecreaseRowCo());
     }
 
