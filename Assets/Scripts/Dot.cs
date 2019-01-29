@@ -28,10 +28,12 @@ public class Dot : MonoBehaviour
     public float swipeResist = 1f;
 
     [Header("Powerup Stuff")]
+    public bool isColorBomb;
     public bool isRowBomb;
     public bool isColumnBomb;
     public GameObject rowArrow;
     public GameObject columnArrow;
+    public GameObject colorBomb;
 
     void Start()
     {
@@ -52,15 +54,15 @@ public class Dot : MonoBehaviour
     }
 
     //This is for testing and Debug only.
-    //private void OnMouseOver()
-    //{
-    //    if (Input.GetMouseButtonDown(1))
-    //    {
-    //        isRowBomb = true;
-    //        GameObject arrow = Instantiate(rowArrow, transform.position, Quaternion.identity);
-    //        arrow.transform.parent = this.transform;
-    //    }
-    //}
+    private void OnMouseOver()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            isColorBomb = true;
+            GameObject color = Instantiate(colorBomb, transform.position, Quaternion.identity);
+            color.transform.parent = this.transform;
+        }
+    }
 
     void Update()
     {
@@ -118,6 +120,18 @@ public class Dot : MonoBehaviour
 
     public IEnumerator CheckMoveCo()
     {
+        if (isColorBomb)
+        {
+            //This piece is a color bomb, and the other piece is the color to destroy
+            findMatches.MatchPiecesOfColor(otherDot.tag);
+            isMatched = true;
+        }
+        else if (otherDot.GetComponent<Dot>().isColorBomb)
+        {
+            //The other piece is a color bomb, and the piece has the color to destroy
+            findMatches.MatchPiecesOfColor(this.gameObject.tag);
+            otherDot.GetComponent<Dot>().isMatched = true;
+        }
         yield return new WaitForSeconds(.4f);
         if (null != otherDot)
         {
