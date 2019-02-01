@@ -106,15 +106,116 @@ public class Board : MonoBehaviour
         return false;
     }
 
+    private bool ColumnOrRow()
+    {
+        int numberHorizontal = 0;
+        int numberVertical = 0;
+
+        Dot firstPiece = findMatches.currentMatches[0].GetComponent<Dot>();
+        if (null != firstPiece)
+        {
+            foreach (GameObject currentPiece in findMatches.currentMatches)
+            {
+                Dot dot = currentPiece.GetComponent<Dot>();
+                if (dot.row == firstPiece.row)
+                {
+                    numberHorizontal++;
+                }
+                if (dot.column == firstPiece.column)
+                {
+                    numberVertical++;
+                }
+            }
+        }
+
+        return (numberHorizontal == 5 || numberVertical == 5);
+    }
+
+    private void CheckToMakeBombs()
+    {
+        if (findMatches.currentMatches.Count == 4 ||
+            findMatches.currentMatches.Count == 7)
+        {
+            findMatches.CheckBombs();
+        }
+
+        if (findMatches.currentMatches.Count == 5 ||
+            findMatches.currentMatches.Count == 8)
+        {
+            if (ColumnOrRow())
+            {
+                //Make a color bomb
+                //Debug.Log("Make a color bomb");
+                //is the current dot matched?
+                if (null != currentDot)
+                {
+                    if (currentDot.isMatched)
+                    {
+                        if (false == currentDot.isColorBomb)
+                        {
+                            currentDot.isMatched = false;
+                            currentDot.MakeColorBomb();
+                        }
+                    }
+                    else
+                    {
+                        if (null != currentDot.otherDot)
+                        {
+                            Dot otherDot = currentDot.otherDot.GetComponent<Dot>();
+                            if (otherDot.isMatched)
+                            {
+                                if (false == otherDot.isColorBomb)
+                                {
+                                    otherDot.isMatched = false;
+                                    otherDot.MakeColorBomb();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                //Make an adjacent bomb
+                //Debug.Log("Make an adjacent bomb");
+                if (null != currentDot)
+                {
+                    if (currentDot.isMatched)
+                    {
+                        if (false == currentDot.isAdjacentBomb)
+                        {
+                            currentDot.isMatched = false;
+                            currentDot.MakeAdjacentBomb();
+                        }
+                    }
+                    else
+                    {
+                        if (null != currentDot.otherDot)
+                        {
+                            Dot otherDot = currentDot.otherDot.GetComponent<Dot>();
+                            if (otherDot.isMatched)
+                            {
+                                if (false == otherDot.isAdjacentBomb)
+                                {
+                                    otherDot.isMatched = false;
+                                    otherDot.MakeAdjacentBomb();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     private void DestroyMatchesAt(int column, int row)
     {
         if (allDots[column, row].GetComponent<Dot>().isMatched)
         {
             //How many elements are in the matched pieces list from findMatches?
-            if (findMatches.currentMatches.Count == 4 ||
-                findMatches.currentMatches.Count == 7)
+            if (findMatches.currentMatches.Count >= 4)
             {
-                findMatches.CheckBombs();
+                CheckToMakeBombs();
             }
 
             GameObject particle = Instantiate(destroyEffect, 
