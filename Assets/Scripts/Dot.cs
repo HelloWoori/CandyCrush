@@ -28,17 +28,22 @@ public class Dot : MonoBehaviour
     public float swipeResist = 1f;
 
     [Header("Powerup Stuff")]
-    public bool isColorBomb;
     public bool isRowBomb;
     public bool isColumnBomb;
+    public bool isColorBomb;
+    public bool isAdjacentBomb;
+
     public GameObject rowArrow;
     public GameObject columnArrow;
     public GameObject colorBomb;
+    public GameObject adjacentMarker;
 
     void Start()
     {
         isRowBomb = false;
         isColumnBomb = false;
+        isColorBomb = false;
+        isAdjacentBomb = false;
 
         findMatches = FindObjectOfType<FindMatches>();
         board = FindObjectOfType<Board>();
@@ -58,9 +63,9 @@ public class Dot : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-            isColorBomb = true;
-            GameObject color = Instantiate(colorBomb, transform.position, Quaternion.identity);
-            color.transform.parent = this.transform;
+            isAdjacentBomb = true;
+            GameObject marker = Instantiate(adjacentMarker, transform.position, Quaternion.identity);
+            marker.transform.parent = this.transform;
         }
     }
 
